@@ -16,7 +16,7 @@ public class ProducerDemo
 	
     public static void main( String[] args )
     {
-    	
+    	//producer
     	logger.info("Configure");
     	Properties prop = new Properties();
     	prop.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
