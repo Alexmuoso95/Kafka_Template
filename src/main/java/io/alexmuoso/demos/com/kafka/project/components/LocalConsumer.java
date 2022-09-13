@@ -7,6 +7,7 @@ import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.CooperativeStickyAssignor;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -25,7 +26,10 @@ public class LocalConsumer {
     	prop.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
     	prop.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
     	prop.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "second_group");
+    	prop.setProperty(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, CooperativeStickyAssignor.class.getName());
     	prop.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); //earliest means it read from the beginning 
+    	//prop.setProperty(ConsumerConfig.GROUP_INSTANCE_ID_CONFIG, ""); //earliest means it read from the beginning 
+
     	
     	log.info("Create consumer");
     	KafkaConsumer<String, String> consumer = new KafkaConsumer<>(prop);
